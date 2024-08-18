@@ -1,0 +1,16 @@
+
+<div class="list-group">
+    <a href="/kurslar" class= "list-group-item list-group-item-action " >Tüm Kategoriler</a>
+    {% for category in categories %}
+        <a href="{% url 'course_by_category' category.slug %}"    class="list-group-item list-group-item-action {% if seciliKategori == category.slug %}active{% endif %}">
+        {{ category.name|title }}
+        </a>
+    {% endfor %}
+</div>
+
+<style>
+    .active{
+        background: #DC3545 !important;
+        border-color : #DC3545 !important;
+    }
+</style>

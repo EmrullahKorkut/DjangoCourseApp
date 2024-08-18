@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block page_title %}
+    Create Course
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-4">
+                <form action="{% url 'create_course' %}" method="POST" novalidate enctype="multipart/form-data">
+
+                    {% csrf_token %}
+
+                    {% for field in form %}
+                    
+                    <div class="mb-3 {% if field.errors %} invalid {% endif %}">
+                        
+                        {% if field.errors %} 
+                        <div class="alert alert-danger">{{field.errors}}</div>
+                        {% endif %}
+                        
+                        <label class="form-label" for="{{field.id_for_label}}">{{field.label}}</label>
+                        {{field}}
+                    </div>
+
+                    {% endfor %}
+                    
+                    {% comment %} <div class="mb-3 {% if form.title.errors %} invalid {% endif %}">
+                        {{form.title.errors}}
+                        <label class="form-label" for="{{form.title.id_for_label}}">Kurs Başlığı</label>
+                        {{form.title}}
+                    </div>
+
+                    <div class="mb-3 {% if form.description.errors %} invalid {% endif %}">
+                        {{form.description.errors}}
+                        <label class="form-label" for="{{form.description.id_for_label}}">Kurs Açıklaması</label>
+                        {{form.description}}
+                    </div>
+
+                    <div class="mb-3 {% if form.imageUrl.errors %} invalid {% endif %}">
+                        {{form.imageUrl.errors}}
+                        <label class="form-label" for="{{form.imageUrl.id_for_label}}">İmaj Adresi</label>
+                        {{form.imageUrl}}
+                    </div>
+
+                    <div class="mb-3 {% if form.slug.errors %} invalid {% endif %}">
+                        {{form.slug.errors}}
+                        <label class="form-label" for="{{form.slug.id_for_label}}">Slug Bilgisi</label>
+                        {{form.slug}}
+                    </div> {% endcomment %}
+                
+                    <button class="btn btn-danger" type="submit" >Kaydet</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js_files %}
+    <script src="{% static "courses/js/script.js" %}"></script>
+{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "courses/css/style.css" %}">
+{% endblock %}
