@@ -12,21 +12,9 @@
             <div class="col-4">
                 <form action="{% url 'create_course' %}" method="POST" novalidate enctype="multipart/form-data">
 
-                    {% csrf_token %}
-
-                    {% for field in form %}
+                    {% csrf_token %}    
                     
-                    <div class="mb-3 {% if field.errors %} invalid {% endif %}">
-                        
-                        {% if field.errors %} 
-                        <div class="alert alert-danger">{{field.errors}}</div>
-                        {% endif %}
-                        
-                        <label class="form-label" for="{{field.id_for_label}}">{{field.label}}</label>
-                        {{field}}
-                    </div>
-
-                    {% endfor %}
+                    {% include "partials/_form.html" %}
                     
                     {% comment %} <div class="mb-3 {% if form.title.errors %} invalid {% endif %}">
                         {{form.title.errors}}
